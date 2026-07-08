@@ -214,7 +214,7 @@ static int simple_link_init(struct simple_util_priv *priv,
 	dai_link->init			= simple_util_dai_init;
 	dai_link->ops			= &simple_ops;
 
-	return simple_util_set_dailink_name(dev, dai_link, name);
+	return simple_util_set_dailink_name(priv, dai_link, name);
 }
 
 static int simple_dai_link_of_dpcm(struct simple_util_priv *priv,
@@ -286,7 +286,7 @@ static int simple_dai_link_of_dpcm(struct simple_util_priv *priv,
 
 	simple_parse_convert(dev, np, &dai_props->adata);
 
-	snd_soc_dai_link_set_capabilities(dai_link);
+
 
 	ret = simple_link_init(priv, node, codec, li, prefix, dai_name);
 
@@ -512,7 +512,7 @@ static int simple_parse_of(struct simple_util_priv *priv, struct link_info *li)
 	if (ret < 0)
 		return ret;
 
-	ret = simple_util_parse_card_name(card, PREFIX);
+	ret = simple_util_parse_card_name(priv, PREFIX);
 	if (ret < 0)
 		return ret;
 
